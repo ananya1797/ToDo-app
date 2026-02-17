@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 function Dashboard() {
@@ -16,16 +16,17 @@ function Dashboard() {
   };
 
   // 📥 Fetch all notes
-  const fetchNotes = async () => {
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/note`, {
-        headers: { "auth-token": token }
-      });
-      setNotes(res.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const fetchNotes = useCallback(async () => {
+  try {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/note`, {
+      headers: { "auth-token": token }
+    });
+    setNotes(res.data);
+  } catch (err) {
+    console.error(err);
+  }
+}, [token]);
+
 
   // ➕ Add note
   const addNote = async () => {
@@ -64,12 +65,13 @@ function Dashboard() {
 
   // 🔐 Protect route
   useEffect(() => {
-    if (!token) {
-      window.location.href = "/login";
-    } else {
-      fetchNotes();
-    }
-  }, [token]);
+  if (!token) {
+    window.location.href = "/login";
+  } else {
+    fetchNotes();
+  }
+}, [token, fetchNotes]);
+
 
   const handleUpgrade = async () => {
   try {
