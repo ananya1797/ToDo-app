@@ -18,9 +18,12 @@ function Dashboard() {
   // 📥 Fetch all notes
   const fetchNotes = useCallback(async () => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/note`, {
-      headers: { "auth-token": token }
-    });
+    const res = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/note`,
+      {
+        headers: { "auth-token": token }
+      }
+    );
     setNotes(res.data);
   } catch (err) {
     console.error(err);
@@ -64,6 +67,7 @@ function Dashboard() {
   };
 
   // 🔐 Protect route
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
   if (!token) {
     window.location.href = "/login";
