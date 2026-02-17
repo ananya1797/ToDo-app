@@ -69,7 +69,7 @@ function Dashboard() {
     } else {
       fetchNotes();
     }
-  }, []);
+  }, [token]);
 
   const handleUpgrade = async () => {
   try {
