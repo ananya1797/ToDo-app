@@ -10,7 +10,7 @@ function Login() {
     e.preventDefault();
 
     const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
       form
     );
 

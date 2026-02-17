@@ -53,7 +53,7 @@ function Dashboard() {
   // ❌ Delete note
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/note/${id}`, {
+      await axios.delete(`${REACT_APP_BACKEND_URL}/api/note/${id}`, {
         headers: { "auth-token": token }
       });
       fetchNotes();
@@ -74,7 +74,7 @@ function Dashboard() {
   const handleUpgrade = async () => {
   try {
     const order = await axios.post(
-      "http://localhost:5000/api/payment/create-order",
+      `${REACT_APP_BACKEND_URL}/api/payment/create-order`,
       {},
       { headers: { "auth-token": token } }
     );
@@ -87,7 +87,7 @@ function Dashboard() {
 
       handler: async function () {
         await axios.post(
-          "http://localhost:5000/api/payment/verify",
+          `${REACT_APP_BACKEND_URL}/api/payment/verify`,
           {},
           { headers: { "auth-token": token } }
         );
