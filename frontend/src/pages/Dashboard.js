@@ -18,7 +18,7 @@ function Dashboard() {
   // 📥 Fetch all notes
   const fetchNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/note", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/note`, {
         headers: { "auth-token": token }
       });
       setNotes(res.data);
@@ -35,7 +35,7 @@ function Dashboard() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/note", form, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/note`, form, {
         headers: { "auth-token": token }
       });
 
@@ -53,7 +53,7 @@ function Dashboard() {
   // ❌ Delete note
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`${REACT_APP_BACKEND_URL}/api/note/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/note/${id}`, {
         headers: { "auth-token": token }
       });
       fetchNotes();
@@ -74,7 +74,7 @@ function Dashboard() {
   const handleUpgrade = async () => {
   try {
     const order = await axios.post(
-      `${REACT_APP_BACKEND_URL}/api/payment/create-order`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/payment/create-order`,
       {},
       { headers: { "auth-token": token } }
     );
@@ -87,7 +87,7 @@ function Dashboard() {
 
       handler: async function () {
         await axios.post(
-          `${REACT_APP_BACKEND_URL}/api/payment/verify`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/payment/verify`,
           {},
           { headers: { "auth-token": token } }
         );
