@@ -68,13 +68,15 @@ function Dashboard() {
 
   // 🔐 Protect route
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
+ useEffect(() => {
   if (!token) {
     window.location.href = "/login";
   } else {
     fetchNotes();
   }
-}, [token, fetchNotes]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
 
 
   const handleUpgrade = async () => {
