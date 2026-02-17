@@ -35,7 +35,7 @@ function Dashboard() {
     }
 
     try {
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/note`, form, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/note/createnote`, form, {
         headers: { "auth-token": token }
       });
 
